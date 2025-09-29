@@ -1,3 +1,14 @@
+node -v
+npm -v
+npm install -g @angular/cli@14
+ng version
+ng new collection
+cd collection
+ng serve
+npm install –save-dev @types/node@16
+ng serve
+ng generate component collection
+
 Line 1 import this coding collection.component.scss 
 .container { 
 max-width: 600px; margin: 20px auto; 
@@ -77,3 +88,4 @@ Line 1 import this coding collection.component.html
 </div> 
 Line 1 import this coding app.component.html 
 <app-collection></app-collection>
+
