@@ -11,78 +11,79 @@ Create the component in our project file
 STEP 4:
 Running the program in ng serve
 CODING:
+Line 1 import this code app.component.html 
 <!DOCTYPE html>
 <html ng-app="studentApp">
 <head>
-  <meta charset="UTF-8">
-  <title>Student CGPA App</title>
-  <!-- AngularJS CDN -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+Â  <meta charset="UTF-8">
+Â  <title>Student CGPA App</title>
+Â  <!-- AngularJS CDN -->
+Â  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body ng-controller="StudentController">
 
-  <h1>Student Details & CGPA</h1>
+Â  <h1>Student Details & CGPA</h1>
 
-  <!-- Input: Number of Students -->
-  <label>Enter number of students: </label>
-  <input type="number" ng-model="studentCount" min="1" />
-  <button ng-click="generateForm()">Generate Form</button>
+Â  <!-- Input: Number of Students -->
+Â  <label>Enter number of students: </label>
+Â  <input type="number" ng-model="studentCount" min="1" />
+Â  <button ng-click="generateForm()">Generate Form</button>
 
-  <div ng-if="students.length > 0">
-    <h3>Enter Student Details:</h3>
-    <div ng-repeat="student in students track by $index">
-      <p>
-        <strong>Student {{$index + 1}}:</strong><br>
-        Name: <input type="text" ng-model="student.name" placeholder="Enter Name" />
-        Register No: <input type="text" ng-model="student.regno" placeholder="Enter Reg No" />
-        CGPA: <input type="number" step="0.01" ng-model="student.cgpa" placeholder="Enter CGPA" />
-      </p>
-    </div>
-    <button ng-click="showDetails()">Show Details</button>
-  </div>
+Â  <div ng-if="students.length > 0">
+Â  Â  <h3>Enter Student Details:</h3>
+Â  Â  <div ng-repeat="student in students track by $index">
+Â  Â  Â  <p>
+Â  Â  Â  Â  <strong>Student {{$index + 1}}:</strong><br>
+Â  Â  Â  Â  Name: <input type="text" ng-model="student.name" placeholder="Enter Name" />
+Â  Â  Â  Â  Register No: <input type="text" ng-model="student.regno" placeholder="Enter Reg No" />
+Â  Â  Â  Â  CGPA: <input type="number" step="0.01" ng-model="student.cgpa" placeholder="Enter CGPA" />
+Â  Â  Â  </p>
+Â  Â  </div>
+Â  Â  <button ng-click="showDetails()">Show Details</button>
+Â  </div>
 
-  <!-- Output -->
-  <div ng-if="display">
-    <h2>Student List (Total: {{students.length}})</h2>
-    <table border="1" cellpadding="5">
-      <tr>
-        <th>S.No</th>
-        <th>Name</th>
-        <th>Register No</th>
-        <th>CGPA</th>
-      </tr>
-      <tr ng-repeat="s in students track by $index">
-        <td>{{$index + 1}}</td>
-        <td>{{s.name}}</td>
-        <td>{{s.regno}}</td>
-        <td>{{s.cgpa}}</td>
-      </tr>
-    </table>
-  </div>
+Â  <!-- Output -->
+Â  <div ng-if="display">
+Â  Â  <h2>Student List (Total: {{students.length}})</h2>
+Â  Â  <table border="1" cellpadding="5">
+Â  Â  Â  <tr>
+Â  Â  Â  Â  <th>S.No</th>
+Â  Â  Â  Â  <th>Name</th>
+Â  Â  Â  Â  <th>Register No</th>
+Â  Â  Â  Â  <th>CGPA</th>
+Â  Â  Â  </tr>
+Â  Â  Â  <tr ng-repeat="s in students track by $index">
+Â  Â  Â  Â  <td>{{$index + 1}}</td>
+Â  Â  Â  Â  <td>{{s.name}}</td>
+Â  Â  Â  Â  <td>{{s.regno}}</td>
+Â  Â  Â  Â  <td>{{s.cgpa}}</td>
+Â  Â  Â  </tr>
+Â  Â  </table>
+Â  </div>
 
-  <script>
-    // AngularJS App
-    var app = angular.module("studentApp", []);
+Â  <script>
+Â  Â  // AngularJS App
+Â  Â  var app = angular.module("studentApp", []);
 
-    app.controller("StudentController", function($scope) {
-      $scope.students = [];
-      $scope.display = false;
+Â  Â  app.controller("StudentController", function($scope) {
+Â  Â  Â  $scope.students = [];
+Â  Â  Â  $scope.display = false;
 
-      // Generate empty student forms
-      $scope.generateForm = function() {
-        $scope.students = [];
-        for (var i = 0; i < $scope.studentCount; i++) {
-          $scope.students.push({ name: "", regno: "", cgpa: "" });
-        }
-        $scope.display = false;
-      };
+Â  Â  Â  // Generate empty student forms
+Â  Â  Â  $scope.generateForm = function() {
+Â  Â  Â  Â  $scope.students = [];
+Â  Â  Â  Â  for (var i = 0; i < $scope.studentCount; i++) {
+Â  Â  Â  Â  Â  $scope.students.push({ name: "", regno: "", cgpa: "" });
+Â  Â  Â  Â  }
+Â  Â  Â  Â  $scope.display = false;
+Â  Â  Â  };
 
-      // Show details
-      $scope.showDetails = function() {
-        $scope.display = true;
-      };
-    });
-  </script>
+Â  Â  Â  // Show details
+Â  Â  Â  $scope.showDetails = function() {
+Â  Â  Â  Â  $scope.display = true;
+Â  Â  Â  };
+Â  Â  });
+Â  </script>
 
 </body>
 </html>
@@ -90,4 +91,5 @@ CODING:
 
 
 OUTPUT:
+
 
