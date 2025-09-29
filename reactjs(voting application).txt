@@ -1,0 +1,51 @@
+npx create-react-app voting-app
+cd voting-app
+npm start
+app.js
+import React, { useState } from 'react';
+
+const subjects = ['Tamil', 'Math', 'Science', 'History', 'English'];
+
+function App() {
+  const [hasVoted, setHasVoted] = useState(false);
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+  const [selectedSubject, setSelectedSubject] = useState('');
+
+  const handleVote = (subject) => {
+    if (hasVoted) {
+      setMessage(`? You have already voted for "${selectedSubject}".`);
+      setMessageType('error');
+    } else {
+      setSelectedSubject(subject);
+      setHasVoted(true);
+      setMessage(`? Successfully voted for "${subject}".`);
+      setMessageType('success');
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>??? Vote for a Subject</h1>
+      <ul className="subject-list">
+        {subjects.map((subject, index) => (
+          <li key={index} className="subject-item">
+            <button onClick={() => handleVote(subject)} className="vote-button">
+              Vote for {subject}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {message && (
+        <div className={messageType === 'success' ? 'message-success' : 'message-error'}>
+          {message}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
+
+

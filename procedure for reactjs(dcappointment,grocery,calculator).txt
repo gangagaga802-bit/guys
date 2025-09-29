@@ -1,0 +1,28 @@
+Cmd
+node -v
+nvm -v
+nvm list
+nvm use 22.17.0
+npm create vite@latest doctorappointment
+Need to install the following packages:
+create-vite@8.0.1
+Ok to proceed? (y) y
+Select a framework:
+|  React
+|
+o  Select a variant:
+|  JavaScript
+|
+o  Use rolldown-vite (Experimental)?:
+|  No
+|
+o  Install with npm and start now?
+|  No
+
+cd docappointment
+ npm install
+npm install @vitejs/plugin-react react-router-dom
+npm run dev 
+if error occurs 
+npm install bootstrap
+npm run dev
