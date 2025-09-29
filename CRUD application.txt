@@ -1,0 +1,121 @@
+node -v
+npm -v
+npm install -g @angular/cli@14
+ng version
+ng new mynewapp
+cd shopping
+ng serve
+npm install –save-dev @types/node@16
+ng serve
+
+Line 4 import this coding app.module.ts 
+import { FormsModule } from '@angular/forms'; 
+Line 12 
+imports: [ 
+BrowserModule, 
+FormsModule 
+], 
+bootstrap: [AppComponent] 
+}) 
+export class AppModule { } 
+Line 14 app.component.ts 
+export class AppComponent { 
+items: Item[] = [ 
+{ id: 1, name: 'Apples', qty: 5 }, 
+{ id: 2, name: 'Bananas', qty: 3 } 
+]; 
+// used for the Add form 
+newItem: Partial<Item> = { name: '', qty: 1 }; 
+// edit state 
+editingId: number | null = null; 
+editCopy: Partial<Item> = {}; 
+private nextId = 3; 
+addItem() { 
+const name = (this.newItem.name || '').trim(); 
+const qty = Number(this.newItem.qty) || 1; 
+if (!name) return alert('Enter a name'); 
+this.items.push({ id: this.nextId++, name, qty}); 
+this.newItem = { name: '', qty: 1 }; 
+}
+deleteItem(id: number) { 
+if (!confirm('Delete this item?')) return; 
+this.items = this.items.filter(i => i.id !== id); 
+if (this.editingId === id) this.cancelEdit(); 
+} 
+startEdit(item: Item) { 
+this.editingId = item.id; 
+// keep a shallow copy so changes are not applied until Save 
+this.editCopy = { id: item.id, name: item.name, qty: item.qty }; 
+} 
+updateItem() { 
+if (this.editingId == null) return; 
+const name = (this.editCopy.name || '').trim(); 
+const qty = Number(this.editCopy.qty) || 1; 
+if (!name) return alert('Enter a name'); 
+const idx = this.items.findIndex(i => i.id === this.editingId); 
+if (idx > -1) { 
+this.items[idx] = { id: this.editingId, name, qty }; 
+} 
+this.cancelEdit(); 
+} 
+cancelEdit() { 
+this.editingId = null; 
+this.editCopy = {}; 
+} 
+} 
+app.component.html 
+<div style="max-width:600px;margin:20px auto;font-family:Arial, Helvetica, sans-serif"> 
+<h2>Simple CRUD — Angular only</h2> 
+<!-- Add form -->
+<div style="margin-bottom:16px;padding:12px;border:1px solid #ddd;border-radius:6px"> 
+<label> 
+Name: 
+<input [(ngModel)]="newItem.name" placeholder="item name" /> 
+</label> 
+&nbsp; 
+<label> 
+Qty: 
+<input type="number" min="1" [(ngModel)]="newItem.qty" style="width:60px"/> 
+</label> 
+&nbsp; 
+<button (click)="addItem()">Add</button> 
+</div> 
+<!-- List --> 
+<table style="width:100%;border-collapse:collapse"> 
+<thead> 
+<tr> 
+<th style="text-align:left">Name</th> 
+<th style="width:80px;text-align:left">Qty</th> 
+<th style="width:170px">Actions</th> 
+</tr> 
+</thead> 
+<tbody> 
+<tr *ngFor="let item of items"> 
+<!-- view mode --> 
+<ng-container *ngIf="editingId !== item.id; else editBlock"> 
+<td>{{ item.name }}</td> 
+<td>{{ item.qty }}</td> 
+<td> 
+<button (click)="startEdit(item)">Edit</button>
+<button (click)="deleteItem(item.id)">Delete</button> 
+</td> 
+</ng-container> 
+<!-- edit mode --> 
+<ng-template #editBlock> 
+<td> 
+<input [(ngModel)]="editCopy.name" /> 
+</td> 
+<td> 
+<input type="number" min="1" [(ngModel)]="editCopy.qty" style="width:70px"/> 
+</td> 
+<td> 
+<button (click)="updateItem()">Save</button> 
+<button (click)="cancelEdit()">Cancel</button> 
+</td> 
+</ng-template> 
+</tr> 
+<tr *ngIf="items.length === 0"> 
+<td colspan="3" style="padding:12px;text-align:center;color:#666">No items yet</td> 
+</tr> 
+</tbody> 
+</table></div>
