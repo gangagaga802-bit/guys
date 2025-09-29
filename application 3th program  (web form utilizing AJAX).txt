@@ -1,0 +1,45 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Simple AJAX Program - Search Users</title> 
+</head> 
+<body> 
+<div class="section"> 
+<h3>Search Your Favourite Tamil Movies</h3> 
+<input type="text" id="searchInput" placeholder="Search by movie name" oninput="searchMovies()"> 
+<div id="searchResults"></div> 
+</div> 
+<script> 
+let movies = [ 
+{id:1, name:"Leo", director:"Lokesh"}, 
+{id:2, name:"Maargan", director:"Jhon Paul"}, 
+{id:3, name:"Thalaivan Thalaivi", director:"Pandiyaraj"}, 
+{id:4, name:"PS", director:"Maniratnam"}, 
+{id:5, name:"Jawan", director:"Atlee"}, 
+{id:6, name:"Varisu", director:"vamsi Pandiyaraj"} 
+]; 
+function simulateAjax(callback, delay=1000) { setTimeout(callback,delay); 
+} 
+function searchMovies() { 
+const query = document.getElementById('searchInput').value.toLowerCase(); const resultsDiv = document.getElementById('searchResults'); resultsDiv.innerHTML = ''; 
+if(query==='') { 
+resultsDiv.innerHTML = '<p>Please enater a movie to search.</p>'; return; 
+} 60 
+
+simulateAjax(()=> { 
+const filteredMovies = movies.filter(user=>user.name.toLowerCase().includes(query)); 
+if (filteredMovies.length===0) { 
+resultsDiv.innerHTML = '<p>No movie found matching</p>'; return; 
+} 
+let html = '<div class="movie-list"><h4>Search Results</h4>'; filteredMovies.forEach(movie => { 
+html += `<li><strong>${movie.name}</strong> - Directed by 
+${movie.director}</li>`; 
+}); 
+html += '</ul></div>'; resultsDiv.innerHTML = html; 
+}); 
+}; 
+</script> 
+</body> 
+</html>

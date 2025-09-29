@@ -1,0 +1,79 @@
+Line 1 import this coding collection.component.scss 
+.container { 
+max-width: 600px; margin: 20px auto; 
+font-family: 'Segoe UI', Arial, sans-serif; h2 { 
+text-align: center; margin-bottom: 20px; color: blue; 
+} 
+input { 
+padding: 8px 10px; margin: 5px; 
+border: 1px solid whitesmoke; border-radius: 4px; 
+outline: none; 
+transition: border 0.3s ease; &:focus { 
+border-color: blueviolet; 
+} 
+} 
+button { 
+padding: 8px 14px; margin: 5px; background: blueviolet; color: white; 
+border: none; border-radius: 4px; cursor: pointer; 
+transition: background 0.3s ease; 
+&:hover { 
+background: yellowgreen; 
+} 
+&.remove { background: pink; &:hover { background: brown; 
+} 
+} 
+} 
+ul { 
+list-style: none; padding: 0; 
+li { 
+background: paleturquoise; margin: 5px 0; 
+padding: 10px; border-radius: 6px; display: flex; 
+justify-content: space-between; align-items: center; 
+span { 
+font-weight: 500; 
+} 
+} 
+} 
+.summary { margin-top: 20px; padding: 15px; 
+background:whitesmoke; border-radius: 6px; p { 
+margin: 6px 0;
+p { 
+margin: 6px 0; 
+font-size: 15px; b { 
+color: darkblue; 
+} 
+} 
+} 
+} 
+Line 3 import this coding collection.component.specs.ts 
+collection: { name: string }[] = [ 
+{ name: 'Milk' }, 
+{ name: 'Bread' }, 
+{ name: 'Eggs' } 
+]; 
+// Add new item addItem(newItem: string) { if (newItem.trim()) { 
+this.collection.push({ name: newItem }); 
+} 
+} 
+// Remove item by index removeItem(index: number) { this.collection.splice(index, 1); 
+} 
+// Item count getter 
+get itemCount(): number { return this.collection.length; 
+} 
+}
+Line 1 import this coding collection.component.html 
+<div class="container"> 
+<h2>My Collection</h2> 
+<p>Total Items: {{ itemCount }}</p> 
+<input #itemInput type="text" placeholder="Enter item name" /> 
+<button (click)="addItem(itemInput.value); itemInput.value=''"> Add Item 
+</button> 
+<ul> 
+<li *ngFor="let item of collection; let i = index"> 
+{{ item.name }} 
+<button (click)="removeItem(i)">Remove</button> 
+</li> 
+</ul> 
+</div> 
+Line 1 import this coding app.component.html 
+<app-collection></app-collection>
